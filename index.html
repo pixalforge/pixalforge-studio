@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0912">
+  <meta name="description" content="PixelForge Studio creates bold graphic designs, cinematic video edits, and memorable logos and brand identities.">
+  <title>PixelForge Studio — Design. Edit. Elevate.</title>
+  <style>
+    :root {
+      --bg: #0b0912;
+      --panel: #14111f;
+      --panel-2: #1b1629;
+      --text: #f7f4ff;
+      --muted: #b6aec9;
+      --purple: #a855f7;
+      --purple-light: #c084fc;
+      --line: rgba(255,255,255,.11);
+      --green: #25d366;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .nav-wrap {
+      position: sticky; top: 0; z-index: 20; background: rgba(11,9,18,.84);
+      backdrop-filter: blur(16px); border-bottom: 1px solid var(--line);
+    }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.04em; }
+    .brand-mark {
+      display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px;
+      background: linear-gradient(135deg, var(--purple), #6d28d9); box-shadow: 0 8px 28px #9333ea44;
+      font-size: 19px;
+    }
+    .brand-name { font-size: 18px; }
+    .brand-name span { color: var(--purple-light); }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover, .footer-links a:hover { color: white; }
+    .nav-cta, .btn {
+      display: inline-flex; justify-content: center; align-items: center; gap: 9px;
+      border: 1px solid transparent; border-radius: 12px; padding: 12px 18px; font-weight: 750;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease; cursor: pointer;
+    }
+    .nav-cta, .btn-primary { background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; box-shadow: 0 8px 28px #9333ea30; }
+    .btn:hover, .nav-cta:hover { transform: translateY(-2px); }
+    .btn-secondary { border-color: var(--line); background: rgba(255,255,255,.035); color: white; }
+    .menu-toggle { display: none; border: 1px solid var(--line); color: white; background: var(--panel); padding: 9px 12px; border-radius: 10px; }
+    .hero { position: relative; overflow: hidden; padding: 100px 0 86px; }
+    .hero::before {
+      content: ""; position: absolute; width: 520px; height: 520px; right: -130px; top: -160px;
+      background: radial-gradient(circle, #9333ea36 0, #9333ea00 68%); pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 64px; align-items: center; position: relative; }
+    .eyebrow { display: inline-flex; gap: 9px; align-items: center; color: var(--purple-light); border: 1px solid #a855f74d; background: #a855f710; padding: 7px 12px; border-radius: 99px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #c084fc; box-shadow: 0 0 12px #c084fc; }
+    h1 { margin: 23px 0 18px; max-width: 720px; font-size: clamp(43px, 6vw, 76px); line-height: 1.02; letter-spacing: -.065em; }
+    .gradient-text { background: linear-gradient(100deg, #d8b4fe 0%, #a855f7 48%, #818cf8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { color: var(--muted); max-width: 570px; font-size: 17px; margin: 0 0 28px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .micro-trust { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 28px; color: var(--muted); font-size: 12px; }
+    .micro-trust span::before { content: "✓"; color: #c084fc; font-weight: 900; margin-right: 7px; }
+    .visual { min-height: 410px; position: relative; display: grid; place-items: center; }
+    .orb { position: absolute; width: 310px; height: 310px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #d8b4fe, #9333ea 35%, #3b0764 68%, #0b0912 72%); filter: drop-shadow(0 0 60px #9333ea44); }
+    .visual-card { position: absolute; border: 1px solid #ffffff20; background: linear-gradient(145deg, #21182fdd, #100d19e8); backdrop-filter: blur(15px); border-radius: 20px; padding: 18px; box-shadow: 0 24px 70px #0007; }
+    .visual-card.top { width: 220px; top: 25px; right: 0; transform: rotate(7deg); }
+    .visual-card.bottom { width: 235px; bottom: 24px; left: 0; transform: rotate(-6deg); }
+    .card-label { font-size: 10px; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
+    .visual-card strong { display: block; margin: 7px 0; font-size: 19px; }
+    .mini-bars { display: flex; gap: 5px; margin-top: 14px; }
+    .mini-bars i { height: 5px; border-radius: 99px; display: block; background: linear-gradient(90deg, #a855f7, #818cf8); }
+    .mini-bars i:nth-child(1) { width: 35%; } .mini-bars i:nth-child(2) { width: 23%; opacity: .7; } .mini-bars i:nth-child(3) { width: 15%; opacity: .45; }
+    .visual-symbol { position: relative; z-index: 1; font-size: 110px; font-weight: 900; letter-spacing: -.12em; color: #fff; text-shadow: 0 5px 55px #d8b4fe99; }
+    .section { padding: 84px 0; }
+    .section-head { max-width: 650px; margin-bottom: 36px; }
+    .kicker { color: var(--purple-light); text-transform: uppercase; font-size: 12px; font-weight: 850; letter-spacing: .16em; }
+    h2 { font-size: clamp(30px, 4vw, 46px); letter-spacing: -.045em; line-height: 1.12; margin: 10px 0 13px; }
+    .section-head p, .muted { color: var(--muted); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .service-card { background: linear-gradient(160deg, #181323, #100d18); border: 1px solid var(--line); border-radius: 20px; padding: 27px; transition: transform .2s ease, border-color .2s ease; }
+    .service-card:hover { transform: translateY(-5px); border-color: #a855f766; }
+    .service-icon { width: 50px; height: 50px; display: grid; place-items: center; border-radius: 15px; background: #a855f71c; border: 1px solid #a855f733; font-size: 23px; }
+    .service-card h3 { margin: 20px 0 9px; font-size: 20px; }
+    .service-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .service-card ul { margin: 18px 0 0; padding: 0; list-style: none; color: #ded6eb; font-size: 13px; }
+    .service-card li { margin-top: 8px; }
+    .service-card li::before { content: "✦"; color: var(--purple-light); margin-right: 9px; }
+    .work-section { background: linear-gradient(180deg, #0b0912, #100c19 50%, #0b0912); }
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .work-card { overflow: hidden; border: 1px solid var(--line); background: var(--panel); border-radius: 19px; }
+    .work-art { min-height: 205px; display: grid; place-items: center; padding: 22px; position: relative; overflow: hidden; }
+    .work-art::before { content: ""; position: absolute; width: 190px; height: 190px; border-radius: 50%; filter: blur(1px); opacity: .85; }
+    .art-one { background: linear-gradient(135deg, #21123b, #592a9c); }
+    .art-one::before { background: #d8b4fe; right: -40px; top: -70px; }
+    .art-two { background: linear-gradient(135deg, #101827, #263b70); }
+    .art-two::before { background: #60a5fa; left: -60px; bottom: -110px; }
+    .art-three { background: linear-gradient(135deg, #301324, #8b315d); }
+    .art-three::before { background: #f9a8d4; right: -65px; bottom: -110px; }
+    .art-type { z-index: 1; text-align: center; font-size: 30px; font-weight: 950; letter-spacing: -.06em; line-height: 1.05; text-shadow: 0 3px 22px #0007; }
+    .art-type small { display: block; font-size: 10px; letter-spacing: .22em; margin-top: 10px; }
+    .work-info { padding: 19px; }
+    .work-info h3 { margin: 0 0 5px; font-size: 17px; }
+    .work-info p { margin: 0; font-size: 13px; color: var(--muted); }
+    .work-note { margin-top: 18px; color: var(--muted); font-size: 12px; }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 55px; align-items: center; }
+    .about-panel { border: 1px solid var(--line); border-radius: 22px; padding: 28px; background: linear-gradient(145deg, #1a1328, #100d18); }
+    .about-mark { font-size: 58px; font-weight: 950; letter-spacing: -.12em; color: var(--purple-light); line-height: 1; }
+    .about-panel p { color: var(--muted); margin-bottom: 0; }
+    .about-copy p { color: var(--muted); }
+    .values { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
+    .value { border: 1px solid var(--line); border-radius: 13px; padding: 13px; font-size: 13px; color: #e8def6; }
+    .value b { color: var(--purple-light); display: block; font-size: 15px; margin-bottom: 3px; }
+    .cta-section { padding: 30px 0 90px; }
+    .cta-box { position: relative; overflow: hidden; padding: clamp(28px, 5vw, 55px); border: 1px solid #a855f74d; border-radius: 26px; background: radial-gradient(circle at 90% 10%, #9333ea2e, transparent 38%), linear-gradient(135deg, #1b1329, #100d18); }
+    .cta-box h2 { max-width: 650px; }
+    .cta-box p { max-width: 600px; color: var(--muted); margin-bottom: 24px; }
+    footer { border-top: 1px solid var(--line); padding: 26px 0; color: var(--muted); font-size: 12px; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 18px; }
+    .whatsapp { background: var(--green); color: #07140b; }
+    .whatsapp:hover { background: #48e184; }
+    :focus-visible { outline: 2px solid var(--purple-light); outline-offset: 4px; }
+    @media (max-width: 800px) {
+      .hero { padding: 70px 0 55px; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .visual { min-height: 350px; }
+      .services-grid, .work-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { gap: 25px; }
+      .nav-links { gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(var(--max), calc(100% - 30px)); }
+      nav { min-height: 68px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-cta { display: none; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 22px 22px; background: #100d18; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 8px 0; }
+      .brand-name { font-size: 16px; }
+      h1 { font-size: clamp(42px, 13vw, 60px); }
+      .hero-copy { font-size: 15px; }
+      .visual { min-height: 300px; }
+      .orb { width: 225px; height: 225px; }
+      .visual-symbol { font-size: 84px; }
+      .visual-card.top { width: 170px; right: -2px; top: 5px; }
+      .visual-card.bottom { width: 185px; left: -2px; bottom: 3px; }
+      .visual-card strong { font-size: 15px; }
+      .section { padding: 62px 0; }
+      .services-grid, .work-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 23px; }
+      .work-art { min-height: 190px; }
+      .values { grid-template-columns: 1fr; }
+      .cta-section { padding-bottom: 65px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="PixelForge Studio home">
+        <span class="brand-mark">P<span style="font-size:12px">F</span></span>
+        <span class="brand-name">PixelForge <span>Studio</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">☰ Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#work">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Creative studio · Made to stand out</div>
+          <h1>Design boldly.<br><span class="gradient-text">Tell your story.</span></h1>
+          <p class="hero-copy">PixelForge Studio turns ideas into visuals people remember — from scroll-stopping graphic design to polished video edits and distinctive brand identities.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Start a project <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#work">Explore our work <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="micro-trust"><span>Creative-first thinking</span><span>Detail-driven delivery</span><span>Built around your brief</span></div>
+        </div>
+        <div class="visual" aria-label="Abstract purple creative studio artwork">
+          <div class="orb"></div>
+          <div class="visual-symbol">PF<span style="color:#c084fc">.</span></div>
+          <div class="visual-card top">
+            <div class="card-label">Creative direction</div>
+            <strong>Make it memorable.</strong>
+            <div class="mini-bars"><i></i><i></i><i></i></div>
+          </div>
+          <div class="visual-card bottom">
+            <div class="card-label">Your next big idea</div>
+            <strong>Starts right here.</strong>
+            <div class="mini-bars"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">What we do</div>
+          <h2>Creative services, <span class="gradient-text">built for impact.</span></h2>
+          <p>Clear visuals, thoughtful design, and content that helps your brand show up with confidence.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">▧</div>
+            <h3>Graphic Design</h3>
+            <p>Standout visuals that catch attention and communicate your message clearly.</p>
+            <ul><li>Social media creatives</li><li>Posters & promotional designs</li><li>YouTube thumbnails</li></ul>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">▶</div>
+            <h3>Video Editing</h3>
+            <p>Well-paced edits with a polished finish, shaped for your platform and audience.</p>
+            <ul><li>Short-form reels & shorts</li><li>Creator and gaming edits</li><li>Transitions, titles & sound sync</li></ul>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">✳</div>
+            <h3>Logo & Branding</h3>
+            <p>A consistent visual identity that helps people recognise and remember you.</p>
+            <ul><li>Logo concepts</li><li>Colour & typography direction</li><li>Brand social assets</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section work-section" id="work">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Selected concepts</div>
+          <h2>A glimpse of the <span class="gradient-text">creative direction.</span></h2>
+          <p>These are visual placeholders to show the style of the studio. Replace them with your real projects as your portfolio grows.</p>
+        </div>
+        <div class="work-grid">
+          <article class="work-card">
+            <div class="work-art art-one"><div class="art-type">NEXT<br>LEVEL<small>SOCIAL CAMPAIGN</small></div></div>
+            <div class="work-info"><h3>Social Media Creative</h3><p>Bold layouts for attention-grabbing digital campaigns.</p></div>
+          </article>
+          <article class="work-card">
+            <div class="work-art art-two"><div class="art-type">FRAME<br>BY FRAME<small>VIDEO EDITING</small></div></div>
+            <div class="work-info"><h3>Creator Video Package</h3><p>Energetic visual direction for short-form content.</p></div>
+          </article>
+          <article class="work-card">
+            <div class="work-art art-three"><div class="art-type">FORM<br>& FEEL<small>BRAND IDENTITY</small></div></div>
+            <div class="work-info"><h3>Brand Identity Concept</h3><p>A cohesive look with colour, type, and personality.</p></div>
+          </article>
+        </div>
+        <p class="work-note">Portfolio note: concept examples only — they are not client projects or testimonials.</p>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-panel">
+          <div class="about-mark">PF.</div>
+          <h3>Ideas deserve great execution.</h3>
+          <p>We bring creativity and care to the details, helping each project feel intentional, consistent, and unmistakably yours.</p>
+        </div>
+        <div class="about-copy">
+          <div class="kicker">About PixelForge</div>
+          <h2>Small details. <span class="gradient-text">Big difference.</span></h2>
+          <p>PixelForge Studio is a creative design space for creators, small businesses, and growing brands. Whether you need a single design or a consistent visual style, the goal is simple: make your idea look its best.</p>
+          <div class="values">
+            <div class="value"><b>01 / Thoughtful</b>Every design starts with your goal.</div>
+            <div class="value"><b>02 / Consistent</b>Visuals that feel connected.</div>
+            <div class="value"><b>03 / Collaborative</b>Your feedback guides the process.</div>
+            <div class="value"><b>04 / Purposeful</b>Style with a reason behind it.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <div class="kicker">Have an idea?</div>
+          <h2>Let's make something <span class="gradient-text">people remember.</span></h2>
+          <p>Tell us what you're planning, what you need, and your timeline. Start a conversation on WhatsApp and we'll take it from there.</p>
+          <!-- IMPORTANT: Replace 91XXXXXXXXXX in the link below with your WhatsApp number, including country code, digits only. -->
+          <a class="btn whatsapp" id="whatsappLink" href="https://wa.me/91XXXXXXXXXX?text=Hi%20PixelForge%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">Message us on WhatsApp <span aria-hidden="true">↗</span></a>
+          <p style="font-size:12px;margin:15px 0 0">Before publishing, replace the sample WhatsApp number in the code with your real business number.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a class="brand" href="#home"><span class="brand-mark">P<span style="font-size:12px">F</span></span><span class="brand-name">PixelForge <span>Studio</span></span></a>
+      <div>© <span id="year"></span> PixelForge Studio. Made with purpose.</div>
+      <div class="footer-links"><a href="#services">Services</a><a href="#work">Portfolio</a><a href="#contact">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      menuToggle.textContent = isOpen ? '✕ Close' : '☰ Menu';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        menuToggle.textContent = '☰ Menu';
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
